@@ -25,12 +25,6 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates').replace('\\','/'),
 )
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'APP_DIRS': True,
-    },
-]
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -72,7 +66,7 @@ ROOT_URLCONF = 'heightmaps.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
