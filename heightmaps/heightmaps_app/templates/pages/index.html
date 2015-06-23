@@ -54,6 +54,8 @@
   	function redrawSquare(){
 		squareBaseCoord = getENLL(square.getPath().j,false);
 	  	squareCoords = makeSquareCoords();
+	  	document.getElementById('square-size-display').innerHTML = squareSide/1000 + 'km';
+
 	  	square.setPath(squareCoords);
   	}
 
@@ -138,10 +140,14 @@
 			}
 			#plusminusgroup {
 			  	margin-left: 100px;
-			  	margin-top: 0.3%;
+			  	margin-top: 0.4%;
 			}
 			#export {
-				margin-top: 0.3%;
+				margin-top: 0.4%;
+			}
+			#square-size-display {
+				padding: .9em .6em .9em;
+				margin-top: 0.4%;
 			}
 			.customWidth {
 			    width: 40px !important;
@@ -157,7 +163,7 @@
 					  	<button type="button" class="btn btn-default customWidth" id="plusBtn">+</button>
 					  	<button type="button" class="btn btn-default customWidth" id="minusBtn">-</button>
 					</div>
-					<span class="label label-default">18km</span>
+					<span class="label label-default" id='square-size-display'>18km</span>
 					<button type="button" class="btn btn-default" id="export">Export Map</button>
 				</div>
 			</nav>
