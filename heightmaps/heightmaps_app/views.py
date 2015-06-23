@@ -273,7 +273,7 @@ def main(xll,yll,width):
         dataArray = applyContrast(dataArray,manualMin,manualMax)
 
     ## print the png
-    f = open('output.png', 'wb') 
+    f = open(os.path.join(module_dir, 'data/output.png'), 'wb') 
     w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
     w.write(f, dataArray)
     f.close()    
