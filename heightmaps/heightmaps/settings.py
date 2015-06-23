@@ -103,5 +103,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app/static'
-##STATIC_ROOT = '/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app/static'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+STATICFILES_DIRS = (
+    "/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app/static",
+)
