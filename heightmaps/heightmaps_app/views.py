@@ -9,9 +9,10 @@ def index(request):
 	return render(request, 'pages/index.html')
 
 def export(request):
-	xll = request.GET.get('xll', '')
-	yll = request.GET.get('yll', '')
-	side = request.GET.get('side', '')
+	xll = int(request.GET.get('xll', ''))
+	yll = int(request.GET.get('yll', ''))
+	side = int(request.GET.get('side', ''))
+	main(xll,yll,side)
 	return HttpResponse(xll + ', ' + yll + ', ' + side)
 
 ##GLOBALS
@@ -43,7 +44,7 @@ def findRegions(x,y,w):
     return output
 
 def makeFilename(x,y):
-    return 'data\\' + str(x) + '-' + str(y) + '.asc'
+    return 'data/' + str(x) + '-' + str(y) + '.asc'
 
 ## build 2d array for a region
 def makeArrayForRegion(regionCoord):
@@ -273,4 +274,5 @@ def main(xll,yll,width):
     w.write(f, dataArray)
     f.close()    
 
-    return dataArray
+    return
+    ##return dataArray
