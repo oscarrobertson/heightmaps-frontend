@@ -5,6 +5,8 @@ from django.http import HttpResponse
 import sys
 import png
 
+module_dir = os.path.dirname(__file__)
+
 def index(request):
 	return render(request, 'pages/index.html')
 
@@ -44,7 +46,8 @@ def findRegions(x,y,w):
     return output
 
 def makeFilename(x,y):
-    return 'data/' + str(x) + '-' + str(y) + '.asc'
+	t1 = 'data/' + str(x) + '-' + str(y) + '.asc'
+	return os.path.join(module_dir, t1)
 
 ## build 2d array for a region
 def makeArrayForRegion(regionCoord):
