@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import sys
 import png
+import os
 
 module_dir = os.path.dirname(__file__)
 
