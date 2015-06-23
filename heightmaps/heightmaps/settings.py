@@ -107,5 +107,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 STATICFILES_DIRS = (
-    "/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app/static",
+    "/home/ubuntu/heightmaps-frontend/heightmaps/static",
 )
