@@ -55,7 +55,6 @@
 		squareBaseCoord = getENLL(square.getPath().j,false);
 	  	squareCoords = makeSquareCoords();
 	  	document.getElementById('square-size-display').innerHTML = squareSide/1000 + 'km';
-
 	  	square.setPath(squareCoords);
   	}
 
@@ -115,6 +114,11 @@
 	  		redrawSquare();
 	  	});
 
+	  	$('#square-size-display').on('click', function () {
+	  		squareSide = 18000;
+	  		redrawSquare();
+	  	});
+
 	  	$('#export').on('click', function() {
 	  		squareBaseCoord = getENLL(square.getPath().j,true);
 	  		window.location = "export/?xll="+squareBaseCoord[0]+"?yll="+squareBaseCoord[1]+"?side="+squareSide;
@@ -145,10 +149,6 @@
 			#export {
 				margin-top: 0.4%;
 			}
-			#square-size-display {
-				padding: .9em .6em .9em;
-				margin-top: 0.4%;
-			}
 			.customWidth {
 			    width: 40px !important;
 			}
@@ -164,7 +164,6 @@
 					  	<button type="button" class="btn btn-default customWidth" id="minusBtn">-</button>
 					  	<button type="button" class="btn btn-info customWidth" id='square-size-display'>18km</span>
 					</div>
-					<span class="label label-default" id='square-size-display'>18km</span>
 					<button type="button" class="btn btn-default" id="export">Export Map</button>
 				</div>
 			</nav>
