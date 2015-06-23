@@ -9,7 +9,10 @@ def index(request):
 	return render(request, 'pages/index.html')
 
 def export(request):
-	return HttpResponse('hello')
+	xll = request.GET.get('xll', '')
+	yll = request.GET.get('yll', '')
+	side = request.GET.get('side', '')
+	return HttpResponse(xll + ', ' + yll + ', ' + side)
 
 ##GLOBALS
 ELEMENT_WIDTH = 50
@@ -227,12 +230,12 @@ def applyContrast(data,minimum,maximum):
         output.append(newRow)
     return output
 
-def main():
+def main(xll,yll,width):
     ## location data to input 
-    xll = 0
-    yll = 800000
-    width = 10000
-    desiredSize = 1000
+    ##xll = 0
+    ##yll = 800000
+    ##width = 10000
+    desiredSize = 1081
 
     ## contrast setting:
     ## 0 - Maximum contrast
