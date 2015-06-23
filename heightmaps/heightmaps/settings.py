@@ -66,7 +66,7 @@ ROOT_URLCONF = 'heightmaps.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app'],
+        'DIRS': ['/home/ubuntu/heightmaps-frontend/heightmaps/heightmaps_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
