@@ -15,8 +15,8 @@ def export(request):
 	xll = int(request.GET.get('xll', ''))
 	yll = int(request.GET.get('yll', ''))
 	side = int(request.GET.get('side', ''))
-	main(xll,yll,side)
-	return HttpResponse(xll + ', ' + yll + ', ' + side)
+	return main(xll,yll,side)
+	##return HttpResponse(xll + ', ' + yll + ', ' + side)
 
 ##GLOBALS
 ELEMENT_WIDTH = 50
@@ -273,10 +273,14 @@ def main(xll,yll,width):
         dataArray = applyContrast(dataArray,manualMin,manualMax)
 
     ## print the png
-    f = open(os.path.join(module_dir, 'data/output.png'), 'wb') 
+    ##f = open(os.path.join(module_dir, 'data/output.png'), 'wb')
+    tmpfile = tempfile.TemporaryFile()
     w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
-    w.write(f, dataArray)
-    f.close()    
+    w.write(tmpfile, dataArray)
+    ##f.close()
 
-    return
+    response = HttpResponse(mimetype="image/png")
+	tmpfile.save(response, "PNG")
+	return response
+
     ##return dataArray
