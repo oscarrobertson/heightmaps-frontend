@@ -9,14 +9,14 @@ import os
 module_dir = os.path.dirname(__file__)
 
 def index(request):
-	return render(request, 'pages/index.html')
+    return render(request, 'pages/index.html')
 
 def export(request):
-	xll = int(request.GET.get('xll', ''))
-	yll = int(request.GET.get('yll', ''))
-	side = int(request.GET.get('side', ''))
-	return main(xll,yll,side)
-	##return HttpResponse(xll + ', ' + yll + ', ' + side)
+    xll = int(request.GET.get('xll', ''))
+    yll = int(request.GET.get('yll', ''))
+    side = int(request.GET.get('side', ''))
+    return main(xll,yll,side)
+    ##return HttpResponse(xll + ', ' + yll + ', ' + side)
 
 ##GLOBALS
 ELEMENT_WIDTH = 50
@@ -47,8 +47,8 @@ def findRegions(x,y,w):
     return output
 
 def makeFilename(x,y):
-	t1 = 'data/' + str(x) + '-' + str(y) + '.asc'
-	return os.path.join(module_dir, t1)
+    t1 = 'data/' + str(x) + '-' + str(y) + '.asc'
+    return os.path.join(module_dir, t1)
 
 ## build 2d array for a region
 def makeArrayForRegion(regionCoord):
@@ -280,7 +280,7 @@ def main(xll,yll,width):
     ##f.close()
 
     response = HttpResponse(mimetype="image/png")
-	tmpfile.save(response, "PNG")
-	return response
+    tmpfile.save(response, "PNG")
+    return response
 
     ##return dataArray
