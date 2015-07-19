@@ -5,6 +5,7 @@ from django.http import HttpResponse
 import sys
 import png
 import os
+import tempfile
 
 module_dir = os.path.dirname(__file__)
 
