@@ -275,15 +275,15 @@ def main(xll,yll,width):
 
     ## print the png
     ##f = open(os.path.join(module_dir, 'data/output.png'), 'wb')
-    tmpfile = tempfile.TemporaryFile()
-    tmpfile.seek(0)
-    wrapper = FileWrapper(tmpfile)
-    w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
-    w.write(wrapper, dataArray)
+    #tmpfile = tempfile.TemporaryFile()
+    #tmpfile.seek(0)
+    #wrapper = FileWrapper(tmpfile)
+    #w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
+    #w.write(wrapper, dataArray)
     ##f.close()
-
-    response = HttpResponse(mimetype="image/png")
-    tmpfile.save(response, "PNG")
+    response = HttpResponse(dataArray)
+    # response = HttpResponse(mimetype="image/png")
+    # tmpfile.save(response, "PNG")
     return response
 
 
