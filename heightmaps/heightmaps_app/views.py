@@ -281,7 +281,7 @@ def main(xll,yll,width):
     w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
     w.write(tmpfile, dataArray)
     ##f.close()
-    response = HttpResponse(dataArray, mimetype="image/png")
+    response = HttpResponse(dataArray, content_type="image/png")
     # response = HttpResponse(mimetype="image/png")
     # tmpfile.save(response, "PNG")
     return response
