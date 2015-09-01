@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src={% static "vector3d.js" %}></script>
+<script src={% static "latlon-ellipsoidal.js" %}></script>
+<script src={% static "utm.js" %}></script>
+<script src={% static "dms.js" %}></script>
+<script src={% static "osgridref.js" %}></script>
 <script>
 	imageArray = {{imageArray}}
-	console.log(imageArray)
+
+    function draw(imgData, coords) {
+	    var canvas = document.getElementById("myCanvas");
+	    var ctx = canvas.getContext("2d");
+
+	    var uInt8Array = new Uint8Array(imgData);
+	    //var uInt8Array = imgData;
+	    var i = uInt8Array.length;
+	    var binaryString = [i];
+	    while (i--) {
+	        binaryString[i] = String.fromCharCode(uInt8Array[i]);
+	    }
+	    var data = binaryString.join('');
+
+	    var base64 = window.btoa(data);
+
+	    var img = new Image();
+	    img.src = "data:image/png;base64," + base64;
+	    img.onload = function () {
+	        console.log("Image Onload");
+	        ctx.drawImage(img, coords[0], coords[1], canvas.width, canvas.height);
+	    };
+	    img.onerror = function (stuff) {
+	        console.log("Img Onerror:", stuff);
+	    };
+
+	}
+
+	$(document).ready(function() {
+		draw(imageArray, [0,0])
+	}
 </script>
 </head>
-	<h1>Please Wait</h1>
+	<canvas id="myCanvas"></canvas>
 </html>
