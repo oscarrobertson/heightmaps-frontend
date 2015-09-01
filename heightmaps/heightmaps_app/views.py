@@ -18,7 +18,7 @@ def export(request):
     side = int(request.GET.get('side', ''))
 
     imageArray = main(xll,yll,side)
-    return render_(request, 'pages/imagePage.html', context={"imageArray": imageArray})
+    return render(request, 'pages/imagePage.html', context={"imageArray": imageArray})
     ##return HttpResponse(xll + ', ' + yll + ', ' + side)
 
 ##GLOBALS
