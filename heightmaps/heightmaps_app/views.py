@@ -70,8 +70,11 @@ def makeArrayForRegion(regionCoord):
                 newRow = [int(round(float(k))) for k in f.readline().split()]
                 output.append(newRow)
                 newRow = []
+        return output
     ## if the file does not exist then use the base file
     except IOError as e:
+        pass
+    try:
         baseFilename = "data/BASE.asc"
         with open(baseFilename,'r') as f:
             ncols = int(f.readline()[6:])
@@ -86,7 +89,20 @@ def makeArrayForRegion(regionCoord):
                 newRow = [int(round(float(k))) for k in f.readline().split()]
                 output.append(newRow)
                 newRow = []
-    return output
+        return output
+    ## weird django problem sometimes cause base file to not be found, runs here
+    except IOError as e:
+        ncols = 200
+        nrows = 200
+        xllcorner = regionCoord[0]
+        yllcorner = regionCoord[1]
+        cellsize = 50
+
+        for i in range(nrows):
+            newRow = [-4]*200
+            output.append(newRow)
+            newRow = []
+        return output
 
 def appendMatrixLR(left,right):
     if len(left) != len(right):
