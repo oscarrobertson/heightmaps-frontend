@@ -71,7 +71,7 @@ def makeArrayForRegion(regionCoord):
                 output.append(newRow)
                 newRow = []
     ## if the file does not exist then use the base file
-    except:
+    except IOError as e:
         baseFilename = "data/BASE.asc"
         with open(baseFilename,'r') as f:
             ncols = int(f.readline()[6:])
@@ -86,7 +86,6 @@ def makeArrayForRegion(regionCoord):
                 newRow = [int(round(float(k))) for k in f.readline().split()]
                 output.append(newRow)
                 newRow = []
-
     return output
 
 def appendMatrixLR(left,right):
