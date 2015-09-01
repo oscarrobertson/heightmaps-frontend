@@ -16,7 +16,9 @@ def export(request):
     xll = int(request.GET.get('xll', ''))
     yll = int(request.GET.get('yll', ''))
     side = int(request.GET.get('side', ''))
-    return main(xll,yll,side)
+
+    imageArray = main(xll,yll,side)
+    return render_to_response('pages/imagePage.html', {"imageArray": imageArray})
     ##return HttpResponse(xll + ', ' + yll + ', ' + side)
 
 ##GLOBALS
@@ -277,10 +279,11 @@ def main(xll,yll,width):
     ###w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
     ###w.write(tmpfile, dataArray)
     ##f.close()
-    response = HttpResponse(dataArray)
+    #response = HttpResponse(dataArray)
     # response = HttpResponse(mimetype="image/png")
     # tmpfile.save(response, "PNG")
-    return response
+    #return response
+    return dataArray
 
     ## uncomment to just return the array
     # response = HttpResponse(dataArray)
