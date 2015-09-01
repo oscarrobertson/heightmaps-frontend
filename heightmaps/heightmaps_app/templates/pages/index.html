@@ -90,6 +90,7 @@
   	//gets lower left corner in EN of square
   	//set round to true if using for the python script
   	function getENLL(pathArray, round){
+  		console.log(pathArray)
   		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[0].A, pathArray[0].F));
   		if (round == true){
   			return [Math.round(t1.easting/100)*100, Math.round(t1.northing/100)*100];
