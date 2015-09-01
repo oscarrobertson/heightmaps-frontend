@@ -72,16 +72,17 @@
   		return output;
   	}
 
-  	//input array in gmaps form [rf,rf,rf,rf] where rf.A = lat, rf.F = lon
+  	//input array in gmaps form [rf,rf,rf,rf] where rfG = lat, rf.K = lon 
+  	// used to be A and F BUT THEY CHANGED IT RANDOMLY WHY, if you get NaN issues this is likely the problem
   	function getENSquare(pathArray){
   		output = []
-  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[0].A, pathArray[0].F));
+  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[0].G, pathArray[0].K));
   		output.push([t1.easting,t1.northing]);
-  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[1].A, pathArray[1].F));
+  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[1].G, pathArray[1].K));
   		output.push([t1.easting,t1.northing]);
-  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[2].A, pathArray[2].F));
+  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[2].G, pathArray[2].K));
   		output.push([t1.easting,t1.northing]);
-  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[3].A, pathArray[3].F));
+  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[3].G, pathArray[3].K));
   		output.push([t1.easting,t1.northing]);
   		return output;
   	}
@@ -90,8 +91,7 @@
   	//gets lower left corner in EN of square
   	//set round to true if using for the python script
   	function getENLL(pathArray, round){
-  		console.log(pathArray)
-  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[0].A, pathArray[0].F));
+  		t1 = OsGridRef.latLonToOsGrid(new LatLon(pathArray[0].G, pathArray[0].K));
   		if (round == true){
   			return [Math.round(t1.easting/100)*100, Math.round(t1.northing/100)*100];
   		}
