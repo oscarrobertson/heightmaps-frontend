@@ -17,39 +17,46 @@
 <script src={% static "dms.js" %}></script>
 <script src={% static "osgridref.js" %}></script>
 <script>
-	imageArray = {{imageArray}}
+	imageArray2d = {{imageArray}}
 
-    function draw(imgData, coords) {
-	    var canvas = document.getElementById("myCanvas");
-	    var ctx = canvas.getContext("2d");
-
-	    var uInt8Array = new Uint8Array(imgData);
-	    //var uInt8Array = imgData;
-	    var i = uInt8Array.length;
-	    var binaryString = [i];
-	    while (i--) {
-	        binaryString[i] = String.fromCharCode(uInt8Array[i]);
+	function dataToBase64(colors, width, height){
+	    var canvas = document.createElement('canvas'),
+	        ctx = canvas.getContext('2d'),
+	        color;
+	    //setup canvas
+	    canvas.width = width,
+	    canvas.height = height;
+	    //grab data
+	    var data = ctx.getImageData(0, 0, width, height),
+	        _data = data.data; //simple speed optimization    
+	    //place data
+	    for(var i = 0, l = _data.length; i < l; i+=4){
+	        color = colors[i/4];
+	        _data[i] = color,
+	        _data[i+1] = color,
+	        _data[i+2] = color,
+	        _data[i+3] = 255;
 	    }
-	    var data = binaryString.join('');
-
-	    var base64 = window.btoa(data);
-
-	    var img = new Image();
-	    img.src = "data:image/png;base64," + base64;
-	    img.onload = function () {
-	        console.log("Image Onload");
-	        ctx.drawImage(img, coords[0], coords[1], canvas.width, canvas.height);
-	    };
-	    img.onerror = function (stuff) {
-	        console.log("Img Onerror:", stuff);
-	    };
-
+	    ctx.putImageData(data, 0, 0);
+	    //return base64 string
+	    return canvas.toDataURL();
 	}
 
 	$(document).ready(function() {
-		draw(imageArray, [0,0])
+		var data = [];
+		for(var i = 0, l = 1081; i < l; i++){
+			for(var j = 0, k = 1081; j < k; j++){
+				data.push(imageArray2d[i][j]);
+			}
+		}
+
+		var image = document.getElementById('i');
+		//display image only after it's loaded
+		image.onload = function(){this.style.display='block'}.bind(image);
+		//and finally set the .src
+		image.src = dataToBase64(data, 1000, 1000);
 	});
 </script>
 </head>
-	<canvas id="myCanvas"></canvas>
+	<img id="i" src="" width="1081" height="1081" style="display:none" />
 </html>
