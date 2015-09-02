@@ -224,7 +224,7 @@ def resizeArray(array, width):
 ## find max and min points of data set
 def findMinMax(data):
     maximum = 0
-    minimum = 2**BIT_DEPTH
+    minimum = 2**10
     for row in data:
         a = max(row)
         b = min(row)
@@ -247,7 +247,7 @@ def applyOverallContrast(data):
 ## it will turn the minimum you give into zero and the maximum into (2**BIT_DEPTH)-1
 ## points inbetween will be scaled linearly
 def applyContrast(data,minimum,maximum):
-    factor = (2**BIT_DEPTH-1)/(maximum-minimum)
+    factor = float((2**BIT_DEPTH-1))/(maximum-minimum)
     output = []
     for row in data:
         newRow = [int(round((x-minimum)*factor)) for x in row]
@@ -261,7 +261,7 @@ def main(xll,yll,width):
     ## 0 - Maximum contrast
     ## 1 - Maximum contrast over country
     ## 2 - Manual contrast, make sure you set the manualMax and manualMin values
-    contrastSetting = 0
+    contrastSetting = 1
 
     ## ignore unless you set contrast setting to 2
     manualMin = -200
