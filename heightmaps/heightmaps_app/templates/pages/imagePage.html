@@ -18,7 +18,20 @@
 <script src={% static "osgridref.js" %}></script>
 <script>
 	imageArray2d = {{imageArray}}
-
+	console.log("start array")
+	var data = [];
+	for(var i = 0, l = 1081; i < l; i++){
+		for(var j = 0, k = 1081; j < k; j++){
+			data.push(imageArray2d[i][j]);
+		}
+	}
+	console.log("done array")
+	var image = document.getElementById('i');
+	//display image only after it's loaded
+	image.onload = function(){this.style.display='block'}.bind(image);
+	//and finally set the .src
+	image.src = dataToBase64(data, 1000, 1000);
+	console.log("done all")
 	function dataToBase64(colors, width, height){
 	    var canvas = document.createElement('canvas'),
 	        ctx = canvas.getContext('2d'),
@@ -41,21 +54,6 @@
 	    //return base64 string
 	    return canvas.toDataURL();
 	}
-
-	$(document).ready(function() {
-		var data = [];
-		for(var i = 0, l = 1081; i < l; i++){
-			for(var j = 0, k = 1081; j < k; j++){
-				data.push(imageArray2d[i][j]);
-			}
-		}
-
-		var image = document.getElementById('i');
-		//display image only after it's loaded
-		image.onload = function(){this.style.display='block'}.bind(image);
-		//and finally set the .src
-		image.src = dataToBase64(data, 1000, 1000);
-	});
 </script>
 </head>
 	<img id="i" src="" width="1081" height="1081" style="display:none" />
