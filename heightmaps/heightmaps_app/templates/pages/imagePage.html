@@ -27,8 +27,6 @@
 	}
 	console.log("done array")
 	var image = document.getElementById('i');
-	//display image only after it's loaded
-	image.onload = function(){this.style.display='block'}.bind(image);
 	//and finally set the .src
 	image.src = dataToBase64(data, 1000, 1000);
 	console.log("done all")
@@ -56,5 +54,5 @@
 	}
 </script>
 </head>
-	<img id="i" src="" width="1081" height="1081" style="display:none" />
+	<img id="i" src="" width="1081" height="1081" style="display:block" />
 </html>
