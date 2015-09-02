@@ -16,8 +16,8 @@ def export(request):
     xll = int(request.GET.get('xll', ''))
     yll = int(request.GET.get('yll', ''))
     side = int(request.GET.get('side', ''))
-
-    imageArray = main(xll,yll,side)
+    fullContrast = bool(request.GET.get('contrast', ''))
+    imageArray = main(xll,yll,side,fullContrast)
     return render(request, 'pages/imagePage.html', context={"imageArray": imageArray})
     ##return HttpResponse(xll + ', ' + yll + ', ' + side)
 
@@ -254,18 +254,18 @@ def applyContrast(data,minimum,maximum):
         output.append(newRow)
     return output
 
-def main(xll,yll,width):
+def main(xll,yll,width,fullContrastBool):
     desiredSize = 1081
 
     ## contrast setting:
     ## 0 - Maximum contrast
     ## 1 - Maximum contrast over country
     ## 2 - Manual contrast, make sure you set the manualMax and manualMin values
-    contrastSetting = 1
+    # contrastSetting = 1
 
     ## ignore unless you set contrast setting to 2
-    manualMin = -200
-    manualMax = 2000
+    # manualMin = -200
+    # manualMax = 2000
     
     ## build list of coordinates where the data lies
     regionsNeeded = findRegions(xll,yll,width)
@@ -280,12 +280,16 @@ def main(xll,yll,width):
     dataArray = resizeArray(dataArray,desiredSize)
 
     ## apply contrast
-    if contrastSetting == 0:
+    if fullContrastBool:
         dataArray = applyFullContrast(dataArray)
-    elif contrastSetting == 1:
-        dataArray = applyOverallContrast(dataArray)
     else:
-        dataArray = applyContrast(dataArray,manualMin,manualMax)
+        dataArray = applyOverallContrast(dataArray)
+    # if contrastSetting == 0:
+    #     dataArray = applyFullContrast(dataArray)
+    # elif contrastSetting == 1:
+    #     dataArray = applyOverallContrast(dataArray)
+    # else:
+    #     dataArray = applyContrast(dataArray,manualMin,manualMax)
 
     ## print the png
     ##f = open(os.path.join(module_dir, 'data/output.png'), 'wb')
