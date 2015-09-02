@@ -25,6 +25,7 @@ def export(request):
 ELEMENT_WIDTH = 50
 REGION_WIDTH_IN_ELEMENTS = 200
 REGION_WIDTH = ELEMENT_WIDTH * REGION_WIDTH_IN_ELEMENTS
+BIT_DEPTH = 8
 
 ## Identifies all regions in a given square
 ## Returns list of coordinates of lower left corner of all regions
@@ -223,7 +224,7 @@ def resizeArray(array, width):
 ## find max and min points of data set
 def findMinMax(data):
     maximum = 0
-    minimum = 2**16
+    minimum = 2**BIT_DEPTH
     for row in data:
         a = max(row)
         b = min(row)
@@ -243,10 +244,10 @@ def applyOverallContrast(data):
     return applyContrast(data,-120,1345)
 
 ## this function applies contrast to the given dataset given the min and max values
-## it will turn the minimum you give into zero and the maximum into (2**16)-1
+## it will turn the minimum you give into zero and the maximum into (2**BIT_DEPTH)-1
 ## points inbetween will be scaled linearly
 def applyContrast(data,minimum,maximum):
-    factor = (2**16-1)/(maximum-minimum)
+    factor = (2**BIT_DEPTH-1)/(maximum-minimum)
     output = []
     for row in data:
         newRow = [int(round((x-minimum)*factor)) for x in row]
@@ -291,7 +292,7 @@ def main(xll,yll,width):
     ###tmpfile = tempfile.TemporaryFile()
     #tmpfile.seek(0)
     #wrapper = FileWrapper(tmpfile)
-    ###w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=16)
+    ###w = png.Writer(desiredSize, desiredSize, greyscale=True, bitdepth=BIT_DEPTH)
     ###w.write(tmpfile, dataArray)
     ##f.close()
     #response = HttpResponse(dataArray)
