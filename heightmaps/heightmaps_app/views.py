@@ -16,7 +16,7 @@ def export(request):
     xll = int(request.GET.get('xll', ''))
     yll = int(request.GET.get('yll', ''))
     side = int(request.GET.get('side', ''))
-    fullContrast = bool(request.GET.get('contrast', ''))
+    fullContrast = bool(int(request.GET.get('contrast', '')))
     imageArray = main(xll,yll,side,fullContrast)
     return render(request, 'pages/imagePage.html', context={"imageArray": imageArray})
     ##return HttpResponse(xll + ', ' + yll + ', ' + side)
